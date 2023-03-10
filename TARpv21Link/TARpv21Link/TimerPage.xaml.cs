@@ -29,7 +29,6 @@ namespace TARpv21Link
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             NaitaAeg();
-
         }
     }
 }

@@ -32,16 +32,28 @@ namespace TARpv21Link
                 BackgroundColor = Color.White,
                 TextColor = Color.Black,
             };
+            Button ValgfoorBtn = new Button
+            {
+                Text = "Valgusfoor Page",
+                BackgroundColor = Color.White,
+                TextColor = Color.Black,
+            };
             StackLayout st= new StackLayout 
             { 
                 Orientation= StackOrientation.Vertical,
                 BackgroundColor= Color.Gray,
-                Children= {TextBtn,TimerBtn, BoxBtn}
+                Children= {TextBtn,TimerBtn, BoxBtn,ValgfoorBtn}
             };
             Content= st;
             TextBtn.Clicked += TextBtn_Clicked;
             TimerBtn.Clicked += TimerBtn_Clicked;
             BoxBtn.Clicked += BoxBtn_Clicked;
+            ValgfoorBtn.Clicked += ValgfoorBtn_Clicked;
+        }
+
+        private async void ValgfoorBtn_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Valgusfoor());
         }
 
         private async void BoxBtn_Clicked(object sender, EventArgs e)
