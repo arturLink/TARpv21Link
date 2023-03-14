@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -13,7 +14,7 @@ namespace TARpv21Link
     public partial class Valgusfoor : ContentPage
     {
         Label redlbl, yellbl, grnlbl;
-        Button valja, lulitada;
+        Button valja, lulitada, paevrezim, oorezim;
         BoxView red, yel, grn;
         StackLayout st;
         public Valgusfoor()
@@ -88,35 +89,164 @@ namespace TARpv21Link
                 TextColor = Color.Black,
             };
             lulitada.Clicked += Lulitada_Clicked;
+            oorezim = new Button()
+            {
+                Text = "Öö rezim",
+                BackgroundColor = Color.Gray,
+                TextColor = Color.Black,
+            };
+            oorezim.Clicked += Oorezim_Clicked;
+            paevrezim = new Button()
+            {
+                Text = "Päev rezim",
+                BackgroundColor = Color.Gray,
+                TextColor = Color.Black,
+            };
+            paevrezim.Clicked += Paevrezim_Clicked;
             st = new StackLayout()
             {
                 Orientation = StackOrientation.Vertical,
                 BackgroundColor = Color.White,
-                Children = { red, redlbl, yel, yellbl, grn, grnlbl, valja, lulitada }
+                Children = { red, redlbl, yel, yellbl, grn, grnlbl, valja, lulitada, paevrezim, oorezim }
                 
             };
             Content = st;
         }
+        bool oorezimBL = false;
+        bool paevrezimBL = false;
+        bool onOff = false;
+        private async void Oorezim_Clicked(object sender, EventArgs e)
+        {
+            if (onOff == false)
+            {
+                await DisplayAlert("Tähelepanu", "Välgusfoor tuleb välja lülitada", "Ok");
+            }
+            else if (onOff == true)
+            {
+                paevrezimBL = false;
+                oorezimBL = true;
+                while (oorezimBL == true)
+                {
+                    red.Color = Color.Gray;
+                    yel.Color = Color.Yellow;
+                    grn.Color = Color.Gray;
+                    if (oorezimBL == false)
+                    {
+                        red.Color = Color.DarkRed;
+                        yel.Color = Color.Goldenrod;
+                        grn.Color = Color.DarkGreen;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                    red.Color = Color.Gray;
+                    yel.Color = Color.Gray;
+                    grn.Color = Color.Gray;
+                    if (oorezimBL == false)
+                    {
+                        red.Color = Color.DarkRed;
+                        yel.Color = Color.Goldenrod;
+                        grn.Color = Color.DarkGreen;
+                        break;
+                    }
+                    await Task.Delay(1000);
+                }
+            
+
+            }
+        }
+
+        private async void Paevrezim_Clicked(object sender, EventArgs e)
+        {
+            if (onOff == false)
+            {
+                await DisplayAlert("TÄHELEPANU", "Välgusfoor tuleb välja lülitada", "Ok");
+            }
+            else if (onOff == true)
+            {
+                oorezimBL = false;
+                paevrezimBL = true;
+                while (paevrezimBL == true)
+                {
+                    red.Color = Color.Red;
+                    yel.Color = Color.Gray;
+                    grn.Color = Color.Gray;
+                    if (paevrezimBL == false)
+                    {
+                        red.Color = Color.DarkRed;
+                        yel.Color = Color.Goldenrod;
+                        grn.Color = Color.DarkGreen;
+                        break;
+                    }
+                    await Task.Delay(5000);
+                    red.Color = Color.Gray;
+                    yel.Color = Color.Yellow;
+                    grn.Color = Color.Gray;
+                    if (paevrezimBL == false)
+                    {
+                        red.Color = Color.DarkRed;
+                        yel.Color = Color.Goldenrod;
+                        grn.Color = Color.DarkGreen;
+                        break;
+                    }
+                    await Task.Delay(2000);
+                    red.Color = Color.Gray;
+                    yel.Color = Color.Gray;
+                    grn.Color = Color.Green;
+                    if (paevrezimBL == false)
+                    {
+                        red.Color = Color.DarkRed;
+                        yel.Color = Color.Goldenrod;
+                        grn.Color = Color.DarkGreen;
+                        break;
+                    }
+                    await Task.Delay(5000);
+                    red.Color = Color.Gray;
+                    yel.Color = Color.Yellow;
+                    grn.Color = Color.Gray;
+                    if (paevrezimBL == false)
+                    {
+                        red.Color = Color.DarkRed;
+                        yel.Color = Color.Goldenrod;
+                        grn.Color = Color.DarkGreen;
+                        break;
+                    }
+                    await Task.Delay(2000);
+                    if (paevrezimBL == false)
+                    {
+                        red.Color = Color.DarkRed;
+                        yel.Color = Color.Goldenrod;
+                        grn.Color = Color.DarkGreen;
+                        break;
+                    }
+                }
+            
+            }
+        }
 
         private void Tapvalg_Tapped(object sender, EventArgs e)
         {
-            BoxView viev_sender = (BoxView)sender;
-            if (viev_sender.Color == Color.DarkRed)
+            oorezimBL = false;
+            paevrezimBL = false;
+            BoxView view_sender = (BoxView)sender;
+            if (view_sender.Color == Color.DarkRed)
             {
-                viev_sender.Color = Color.Red;
+                view_sender.Color = Color.Red;
             }
-            else if (viev_sender.Color == Color.Goldenrod)
+            else if (view_sender.Color == Color.Goldenrod)
             {
-                viev_sender.Color = Color.Yellow;
+                view_sender.Color = Color.Yellow;
             }
-            else if (viev_sender.Color == Color.DarkGreen)
+            else if (view_sender.Color == Color.DarkGreen)
             {
-                grn.Color = Color.GreenYellow;
+                view_sender.Color = Color.Yellow;
             }
         }
 
         private void Lulitada_Clicked(object sender, EventArgs e)
         {
+            onOff = true;
+            oorezimBL = false;
+            paevrezimBL = false;
             red.Color = Color.DarkRed;
             yel.Color = Color.Goldenrod;
             grn.Color = Color.DarkGreen;
@@ -127,6 +257,9 @@ namespace TARpv21Link
 
         private void Valja_Clicked(object sender, EventArgs e)
         {
+            onOff = false;
+            oorezimBL = false;
+            paevrezimBL = false;
             red.Color = Color.Gray;
             yel.Color = Color.Gray;
             grn.Color = Color.Gray;
