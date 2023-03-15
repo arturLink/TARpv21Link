@@ -98,7 +98,7 @@ namespace TARpv21Link
             oorezim.Clicked += Oorezim_Clicked;
             paevrezim = new Button()
             {
-                Text = "Päev rezim",
+                Text = "Päeva rezim",
                 BackgroundColor = Color.Gray,
                 TextColor = Color.Black,
             };
