@@ -115,18 +115,19 @@ namespace TARpv21Link
         private void rgbValue(object sender, ValueChangedEventArgs e)
         {
             Slider slSender = sender as Slider;
-
+            if (slSender == r)
+            {
+                rlbl.Text = String.Format("Red = {0:X2}", (int)e.NewValue);
+            }
+            else if (slSender == g)
+            {
+                glbl.Text = String.Format("Green = {0:X2}", (int)e.NewValue);
+            }
+            else if (slSender == b)
+            {
+                blbl.Text = String.Format("Blue = {0:X2}", (int)e.NewValue);
+            }
+            rgbBox.Color = Color.FromRgb((int)r.Value,(int)g.Value,(int)b.Value);
         }
-
-        //private object checkSlider(object yourSender, ValueChangedEventArgs args)
-        //{
-        //    if (yourSender == r)
-        //    {
-        //        rlbl.Text = String.Format("Red = {0:X2}", (int)args.NewValue);
-        //    }
-        //}
-
-
-        //rgbBox.Color = Color.FromRgb(e.NewValue,e.NewValue,e.NewValue);
     }
 }
