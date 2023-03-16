@@ -16,13 +16,36 @@ namespace TARpv21Link
         Random rnd = new Random();
         Label rlbl, glbl, blbl;
         Slider r, g, b;
-        Slider rgb;
+        Stepper stp;
         BoxView rgbBox;
+        Button random;
         List<Slider> sliders = new List<Slider>() { new Slider(), new Slider(), new Slider() };
         public RgbPage()
         {
             List<Object> objects = new List<Object>() { };
 
+            random = new Button()
+            {
+                Text = "Random",
+                BackgroundColor = Color.White,
+                TextColor = Color.Black,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.End
+            };
+            random.Clicked += RndBtn_Clicked;
+            objects.Add(random);
+
+            stp = new Stepper()
+            {
+                Minimum = 0,
+                Maximum = 100,
+                Value = 20,
+                Increment = 5,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.End
+            };
+            stp.ValueChanged += Stp_ValueChanged;
+            objects.Add(stp);
 
             rgbBox = new BoxView()
             {
@@ -110,6 +133,17 @@ namespace TARpv21Link
                 abs.Children.Add((View)item);
             }
             Content = abs;
+        }
+
+        //private void Stp_ValueChanged(object sender, ValueChangedEventArgs e)
+        //{
+        //    int crnerRad = Int64.Parse(rgbBox.CornerRadius.ToString());
+        //    Int64.Parse(rgbBox.CornerRadius.ToString()) += 2;
+        //}
+
+        private void RndBtn_Clicked(object sender, EventArgs e)
+        {
+            rgbBox.Color= Color.FromRgb(rnd.Next(255),rnd.Next(255), rnd.Next(255));
         }
 
         private void rgbValue(object sender, ValueChangedEventArgs e)
