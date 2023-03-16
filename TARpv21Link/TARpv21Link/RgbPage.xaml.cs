@@ -29,7 +29,7 @@ namespace TARpv21Link
                 Text = "Random",
                 BackgroundColor = Color.White,
                 TextColor = Color.Black,
-                HorizontalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.End,
                 VerticalOptions = LayoutOptions.End
             };
             random.Clicked += RndBtn_Clicked;
@@ -38,10 +38,10 @@ namespace TARpv21Link
             stp = new Stepper()
             {
                 Minimum = 0,
-                Maximum = 100,
+                Maximum = 400,
                 Value = 20,
                 Increment = 5,
-                HorizontalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.End
             };
             stp.ValueChanged += Stp_ValueChanged;
@@ -127,7 +127,7 @@ namespace TARpv21Link
             double y = 0;
             foreach (var item in objects)
             {
-                y = y + 0.2;
+                y = y + 0.1;
                 AbsoluteLayout.SetLayoutBounds((BindableObject)item, new Rectangle(0.1, y, 400, 500));
                 AbsoluteLayout.SetLayoutFlags((BindableObject)item, AbsoluteLayoutFlags.PositionProportional);
                 abs.Children.Add((View)item);
@@ -135,11 +135,10 @@ namespace TARpv21Link
             Content = abs;
         }
 
-        //private void Stp_ValueChanged(object sender, ValueChangedEventArgs e)
-        //{
-        //    int crnerRad = Int64.Parse(rgbBox.CornerRadius.ToString());
-        //    Int64.Parse(rgbBox.CornerRadius.ToString()) += 2;
-        //}
+        private void Stp_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            rgbBox.CornerRadius = e.NewValue;
+        }
 
         private void RndBtn_Clicked(object sender, EventArgs e)
         {
